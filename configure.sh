@@ -31,6 +31,10 @@ echo "set dhcp.lan.ra='0'" >> package/base-files/files/bin/config_generate
 sed -i '/dhcp.lan.dhcpv6/d' package/base-files/files/bin/config_generate
 echo "set dhcp.lan.dhcpv6='0'" >> package/base-files/files/bin/config_generate
 
+# 取消编译 带宽监控 nlbwmon
+sed -i 's/CONFIG_PACKAGE_luci-app-nlbwmon=y/CONFIG_PACKAGE_luci-app-nlbwmon=n/g' .config
+sed -i 's/CONFIG_PACKAGE_nlbwmon=y/CONFIG_PACKAGE_nlbwmon=n/g' .config
+
 # Hello World
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 
