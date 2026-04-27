@@ -12,6 +12,9 @@ echo "set network.lan.gateway='192.168.1.1'" >> package/base-files/files/bin/con
 sed -i '/set network.lan.dns/d' package/base-files/files/bin/config_generate
 echo "set network.lan.dns='223.5.5.5 114.114.114.114'" >> package/base-files/files/bin/config_generate
 
+# 修改默认密码
+sed -i 's|root::0:0:99999:7:::|root:$1$X4dKiB7y$KzH4MhV6D0lXlXlXlXlXl.:18888:0:99999:7:::|g' package/base-files/files/etc/shadow
+
 # 禁用 DHCPv4 服务 (忽略此接口)
 sed -i '/dhcp.lan.ignore/d' package/base-files/files/bin/config_generate
 echo "set dhcp.lan.ignore='1'" >> package/base-files/files/bin/config_generate
