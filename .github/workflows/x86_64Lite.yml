@@ -81,7 +81,7 @@ jobs:
       run: |
         cat configs/Driver.config >> openwrt/.config
 
-    - name: Modify configuration
+    - name: 修改同步配置
       run: |
         cat $EXTERNAL_FILE >> openwrt/.config
         cd openwrt && make defconfig
