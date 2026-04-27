@@ -80,12 +80,16 @@ jobs:
       run: |
         cat configs/Driver.config >> openwrt/.config
 
+    # ===================== 这里已修复 ======================
     - name: Modify configuration
       run: |
         cat $EXTERNAL_FILE >> openwrt/.config
-        cd openwrt && make defconfig
+        cd openwrt
+        make defconfig
+        make oldconfig  # 修复配置同步警告
         sed -i '/CONFIG_DEFAULT_luci/'d .config
         cat .config
+    # ======================================================
 
     - name: Download package
       id: package
