@@ -12,6 +12,22 @@ echo "set network.lan.gateway='192.168.1.1'" >> package/base-files/files/bin/con
 sed -i '/set network.lan.dns/d' package/base-files/files/bin/config_generate
 echo "set network.lan.dns='223.5.5.5 114.114.114.114'" >> package/base-files/files/bin/config_generate
 
+# 禁用 DHCPv4 服务 (忽略此接口)
+sed -i '/dhcp.lan.ignore/d' package/base-files/files/bin/config_generate
+echo "set dhcp.lan.ignore='1'" >> package/base-files/files/bin/config_generate
+
+# 禁用 IPv6 前缀分配长度
+sed -i '/network.lan.ip6assign/d' package/base-files/files/bin/config_generate
+echo "set network.lan.ip6assign='0'" >> package/base-files/files/bin/config_generate
+
+# 禁用 RA 路由通告服务
+sed -i '/dhcp.lan.ra/d' package/base-files/files/bin/config_generate
+echo "set dhcp.lan.ra='0'" >> package/base-files/files/bin/config_generate
+
+# 禁用 DHCPv6 服务
+sed -i '/dhcp.lan.dhcpv6/d' package/base-files/files/bin/config_generate
+echo "set dhcp.lan.dhcpv6='0'" >> package/base-files/files/bin/config_generate
+
 # Hello World
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 
