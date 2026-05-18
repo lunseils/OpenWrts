@@ -1,7 +1,13 @@
 #!/bin/bash
-# Modify default system settings
+# 关闭禁用br-lan桥接模式
+sed -i '/set network.lan.type/d' package/base-files/files/bin/config_generate
+echo "set network.lan.type='none'" >> package/base-files/files/bin/config_generate
 
-# 修改默认IP为192.168.10.1
+# 指定LAN接口绑定eth0物理网卡
+sed -i '/set network.lan.ifname/d' package/base-files/files/bin/config_generate
+echo "set network.lan.ifname='eth0'" >> package/base-files/files/bin/config_generate
+
+# 修改默认IP为192.168.1.111
 sed -i 's/192.168.1.1/192.168.1.111/g' package/base-files/files/bin/config_generate 
 
 # 自定义默认网关（旁路由必备）
@@ -30,7 +36,6 @@ echo "set dhcp.lan.ra='0'" >> package/base-files/files/bin/config_generate
 # 禁用 DHCPv6 服务
 sed -i '/dhcp.lan.dhcpv6/d' package/base-files/files/bin/config_generate
 echo "set dhcp.lan.dhcpv6='0'" >> package/base-files/files/bin/config_generate
-
 # Hello World
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 
