@@ -8,11 +8,11 @@ sed -i '/set network.lan.ifname/d' package/base-files/files/bin/config_generate
 echo "set network.lan.ifname='eth0'" >> package/base-files/files/bin/config_generate
 
 # 修改默认IP为192.168.1.111
-sed -i 's/192.168.1.1/192.168.1.111/g' package/base-files/files/bin/config_generate 
+sed -i 's/192.168.1.1/192.168.5.111/g' package/base-files/files/bin/config_generate 
 
 # 自定义默认网关（旁路由必备）
 sed -i '/set network.lan.gateway/d' package/base-files/files/bin/config_generate
-echo "set network.lan.gateway='192.168.1.1'" >> package/base-files/files/bin/config_generate
+echo "set network.lan.gateway='192.168.5.1'" >> package/base-files/files/bin/config_generate
 
 # 自定义默认 DNS
 sed -i '/set network.lan.dns/d' package/base-files/files/bin/config_generate
